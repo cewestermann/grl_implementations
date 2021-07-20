@@ -1,4 +1,5 @@
 import numpy as np
+import itertools
 
 from utils import adjmatrix_to_adjdict
 
@@ -40,5 +41,29 @@ def node_centrality(adjmatrix, iterations=30):
         return helper(eigv, iterations-1)
     
     return helper(e, iterations)
+
+
+def clustering_coefficient(idx, adjmatrix):
+    '''
+    Clustering coefficient, i.e., the ratio of closed triangles in the ego-network
+    of node at idx. If there are three possible closed triangles out of a possible four,
+    the clustering coefficient will yield 0.75.
+    '''
+    # TODO: Could be made way simpler using adjdict. 
+    
+    def n_choose2(n):
+        return len(list(itertools.permutations(n, 2)))
+
+    node = adjmatrix[idx]
+    idxes = np.where(node == 1)[0]
+    neighbors = adjmatrix[idxes]
+
+    count = 0
+    for row in neighbors:
+        count += sum(x for i, x in enumerate(row) if i in idxes)
+    return round(count / n_choose2(idxes), 2)
+
+
+
 
 
