@@ -3,21 +3,25 @@ import numpy as np
 
 def adjmatrix_to_adjdict(matrix):
 
-    def _nonzero(array):
+    def nonzero(array):
         return list(np.nonzero(array)[0])
 
     rows = range(len(matrix))
-    indices = map(_nonzero, matrix)
+    indices = map(nonzero, matrix)
     return dict(zip(rows, indices))
 
 
 def adjdict_to_adjmatrix(adjdict):
+
+    def fill_matrix(matrix):
+        for key, values in adjdict.items():
+            for v in values:
+                matrix[key, v] = 1.
+        return matrix
+
     n_vertices = len(adjdict)
     matrix = np.zeros((n_vertices, n_vertices))
-    for key, values in adjdict.items():
-        for v in values:
-            matrix[key, v] = 1.
-    return matrix
+    return fill_matrix(matrix)
 
 
 FLORENTINE_MATRIX = np.array([[0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
