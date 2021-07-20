@@ -8,5 +8,5 @@ I will use the Florentine Marriage Network from "Robust Action and the Rise of t
 
 ![Florentine Family Network](florentine_network.png)
 
-
+It concerns the study of the Medici family in Florence during the 15th century. You can already see that the Medici family has the most connections (edges), which could be an indicator of their influence (we'll see). 
 
