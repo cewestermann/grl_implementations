@@ -19,4 +19,3 @@ def test_node_centrality(large_adjmatrix):
 def test_clustering_coefficient(idx, expected, large_adjmatrix):
     coef = clustering_coefficient(idx, large_adjmatrix)
     assert coef == expected
-

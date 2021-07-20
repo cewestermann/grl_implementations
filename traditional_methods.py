@@ -4,6 +4,9 @@ import itertools
 from utils import adjmatrix_to_adjdict
 
 
+# ------- Graph Statistics and Kernel Methods ------- # 
+
+
 def node_degree(idx, adjmatrix):
     '''
     Number of edges attached to node at idx.
@@ -62,8 +65,4 @@ def clustering_coefficient(idx, adjmatrix):
     for row in neighbors:
         count += sum(x for i, x in enumerate(row) if i in idxes)
     return round(count / n_choose2(idxes), 2)
-
-
-
-
 
