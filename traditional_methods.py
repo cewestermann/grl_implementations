@@ -25,6 +25,8 @@ def node_centrality(adjmatrix, iterations=30):
 
     We normalize at each iteration and you can interpret the output as being the
     likelihood of a given node being visited during an infinite random walk.
+
+    It is a recurrence relation, so it just made sense to implement it recursively.
     '''
     # Initialize eigenvector to random values
     e = np.random.rand(adjmatrix.shape[0])
