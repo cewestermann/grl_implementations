@@ -24,6 +24,11 @@ def adjdict_to_adjmatrix(adjdict):
     return fill_matrix(matrix)
 
 
+def neighbors(idx, matrix):
+    return matrix[np.where(matrix[idx] == 1)[0]]
+
+
+
 FLORENTINE_MATRIX = np.array([[0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
                               [1., 0., 0., 0., 0., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.],
                               [0., 0., 0., 1., 1., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0.],

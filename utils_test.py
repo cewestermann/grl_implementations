@@ -21,3 +21,9 @@ def test_adjdict_to_adjmatrix():
             )
 
 
+def test_neighbors(large_adjmatrix):
+    res = np.array([[1, 0, 0, 1, 1, 1],
+                    [1, 0, 0, 0, 0, 1],
+                    [1, 1, 1, 0, 0, 0]])
+    assert np.array_equal(neighbors(0, large_adjmatrix), res)
+

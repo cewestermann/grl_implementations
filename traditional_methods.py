@@ -49,7 +49,7 @@ def node_centrality(adjmatrix, iterations=30):
 def clustering_coefficient(idx, adjmatrix):
     '''
     Clustering coefficient, i.e., the ratio of closed triangles in the ego-network
-    of node at idx. If there are three possible closed triangles out of a possible four,
+    of node at idx. If there are three closed triangles out of a possible four,
     the clustering coefficient will yield 0.75.
     '''
     # TODO: Could be made way simpler using adjdict. 
@@ -65,4 +65,9 @@ def clustering_coefficient(idx, adjmatrix):
     for row in neighbors:
         count += sum(x for i, x in enumerate(row) if i in idxes)
     return round(count / n_choose2(idxes), 2)
+
+
+
+# ------- Neighborhood Overlap Detection ------- # 
+
 
