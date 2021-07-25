@@ -2,6 +2,7 @@ import string
 import numpy as np
 
 from hashlib import blake2b
+from collections import Counter
 
 from traditional_methods import node_degree
 from utils import adjmatrix_to_adjdict, adjdict_to_adjmatrix, neighbors
@@ -33,19 +34,16 @@ def determine_multisets(labels, adjmatrix):
 
 
 def compress_labels(labels):
+
+    def _hash(label):
+        h = blake2b(digest_size=10)
+        h.update(str.encode(label))
+        return h.hexdigest()
+
     new_labels = dict()
 
     for node, label in labels.items():
-        h = blake2b(digest_size=10)
-        h.update(str.encode(label))
-        new_labels[node] = h.hexdigest()
+        new_labels[node] = _hash(label)
     return new_labels
-
-
-
-
-
-
-
 
 
