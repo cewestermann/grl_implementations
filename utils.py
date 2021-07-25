@@ -28,6 +28,11 @@ def neighbors(idx, matrix):
     return matrix[np.where(matrix[idx] == 1)[0]]
 
 
+def cosine_similarity(v1, v2):
+    nv1, nv2 = np.linalg.norm(v1), np.linalg.norm(v2)
+    return (v1 @ v2) / (nv1 * nv2)
+
+
 
 FLORENTINE_MATRIX = np.array([[0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
                               [1., 0., 0., 0., 0., 1., 1., 1., 1., 1., 0., 0., 0., 0., 0.],

@@ -1,3 +1,4 @@
+from collections import Counter
 from wl_kernel import *
 
 
@@ -25,4 +26,9 @@ def test_compression():
     assert compress_labels(labels) == res
 
 
+def test_compute_graph_feature_vector():
+    init_labels = Counter({0: '3', 1: '4', 2: '2', 3: '2', 4: '2', 5: '3'}.values())
+    compressed = Counter({0: '2', 1: '2', 2: '3'}.values())
+    v = compute_graph_feature_vector(init_labels, compressed)
+    assert np.array_equal(v, [2, 1, 3, 2, 1])
 

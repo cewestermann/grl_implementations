@@ -27,3 +27,9 @@ def test_neighbors(large_adjmatrix):
                     [1, 1, 1, 0, 0, 0]])
     assert np.array_equal(neighbors(0, large_adjmatrix), res)
 
+
+def test_cosine_similarity():
+    v1 = np.array([1, 2, 3])
+    v2 = np.array([5, 2, 1])
+    cs = cosine_similarity(v1, v2)
+    assert np.isclose(cs, 0.586, rtol=1e-03)

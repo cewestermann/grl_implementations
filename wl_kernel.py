@@ -8,18 +8,11 @@ from traditional_methods import node_degree
 from utils import adjmatrix_to_adjdict, adjdict_to_adjmatrix, neighbors
 
 
-G = np.array([
-    [0, 1, 1, 0, 0, 1],
-    [1, 0, 1, 0, 0, 0],
-    [1, 1, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 1, 1]
-])
-
-
 def assign_init_labels(adjmatrix):
-    return {i: str(node_degree(i, adjmatrix)) for i, n in zip(range(len(adjmatrix)), adjmatrix)}
+
+    def _node_idxes(): return range(len(adjmatrix))
+
+    return {i: str(node_degree(i, adjmatrix)) for i, n in zip(_node_idxes(), adjmatrix)}
 
 
 def determine_multisets(labels, adjmatrix):
@@ -45,5 +38,19 @@ def compress_labels(labels):
     for node, label in labels.items():
         new_labels[node] = _hash(label)
     return new_labels
+
+
+def compute_graph_feature_vector(init, compressed):
+    return np.array([*init.values(), *compressed.values()])
+
+
+def weisfeiler_lehman(adjmatrix, iterations=3):
+    init = assign_init_labels(adjmatrix)
+    for i in range(iterations):
+        c_init = Counter(init.values())
+        multisets = determine_multisets(init, adjmatrix)
+        compressed = compress_labels(multisets)
+        c_compressed = Counter(compressed.values())
+        f_vector = compute_graph_feature_vector(c_init, c_compressed)
 
 
